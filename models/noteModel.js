@@ -25,5 +25,11 @@ const noteSchema = new mongoose.Schema({
     type: Date,
   },
 });
-const Notes = new mongoose.model("notes", noteSchema);
+
+// Indexes
+noteSchema.index({ user: 1 }); // Single-field index on 'user' for user-specific queries
+noteSchema.index({ title: "text", description: "text" }); // Text indexes for full-text search
+
+const Notes = mongoose.model("notes", noteSchema);
+
 module.exports = Notes;

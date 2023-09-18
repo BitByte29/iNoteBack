@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const User = new mongoose.model("users", userSchema);
-// User.createIndexes();
+// Indexes
+userSchema.index({ email: 1 }); // Single-field index on 'email' for unique constraint
+
+const User = mongoose.model("users", userSchema);
+
 module.exports = User;

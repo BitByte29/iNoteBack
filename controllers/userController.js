@@ -14,8 +14,10 @@ exports.getUsers = async (req, res) => {
 
 exports.getUsersCount = async (req, res) => {
   try {
-    const userCount = await User.countDocuments();
-    const noteCount = await Note.countDocuments();
+    const [userCount, noteCount] = await Promise.all([
+      User.countDocuments(),
+      Note.countDocuments(),
+    ]);
 
     res.json({ userCount, noteCount });
   } catch (error) {
